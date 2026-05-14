@@ -1,0 +1,1174 @@
+<!doctype html>
+<html lang="zh-Hant" dir="ltr">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<title>晨光診所 Sunrise Clinic｜以信任為核心的全人照護</title>
+<meta name="description" content="晨光診所提供家庭醫學、小兒、心臟內科、皮膚科等專業門診，並提供病人線上預約、檢驗報告查詢及處方追蹤。WCAG AA 無障礙設計，照顧每一位家庭成員。" />
+<meta name="theme-color" content="#0891B2" />
+
+<!-- Tailwind via CDN (preview-only build, no compile step) -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,typography"></script>
+<script>
+  tailwind.config = {
+    theme: {
+      extend: {
+        colors: {
+          brand: {
+            50:  '#F0FDFA',
+            100: '#CCFBF1',
+            200: '#99F6E4',
+            300: '#5EEAD4',
+            400: '#2DD4BF',
+            500: '#0EA5B7',
+            600: '#0891B2', // primary
+            700: '#0E7490',
+            800: '#155E75',
+            900: '#134E4A', // body text
+          },
+          care: {
+            50:  '#F0FDF4',
+            100: '#DCFCE7',
+            500: '#22C55E', // CTA
+            600: '#16A34A',
+            700: '#15803D',
+          },
+          warm: {
+            50:  '#FFFBEB',
+            100: '#FEF3C7',
+            500: '#F59E0B',
+            600: '#D97706',
+          },
+          ink: {
+            DEFAULT: '#134E4A',
+            soft:    '#1F3A38',
+            muted:   '#475569',
+            faint:   '#64748B',
+            line:    '#E2E8F0',
+          },
+        },
+        fontFamily: {
+          sans: ['Inter', 'Noto Sans TC', 'system-ui', '-apple-system', 'Segoe UI', 'sans-serif'],
+          display: ['Noto Serif TC', 'Inter', 'serif'],
+        },
+        borderRadius: {
+          xl2: '1.25rem',
+        },
+        boxShadow: {
+          card: '0 1px 2px rgba(15,23,42,.04), 0 8px 24px -16px rgba(8,145,178,.18)',
+          cardHover: '0 2px 4px rgba(15,23,42,.06), 0 18px 40px -20px rgba(8,145,178,.28)',
+          ring: '0 0 0 3px rgba(8,145,178,.18)',
+        },
+      },
+    },
+  };
+</script>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans+TC:wght@400;500;600;700&family=Noto+Serif+TC:wght@500;600;700&display=swap" />
+
+<style>
+  :root { color-scheme: light; }
+  html { font-size: 16px; }
+  @media (min-width: 768px) { html { font-size: 17px; } }
+  body {
+    font-family: 'Inter', 'Noto Sans TC', system-ui, sans-serif;
+    color: #134E4A;
+    background: #FFFFFF;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+    line-height: 1.65;
+  }
+  h1, h2, h3, h4 { letter-spacing: -0.01em; }
+  .font-display { font-family: 'Noto Serif TC', 'Inter', serif; letter-spacing: 0; }
+
+  /* Visible focus rings — WCAG 2.4.7 */
+  :focus { outline: none; }
+  :focus-visible {
+    outline: 3px solid #0891B2;
+    outline-offset: 3px;
+    border-radius: 6px;
+  }
+  .btn:focus-visible,
+  .field:focus-visible,
+  a:focus-visible,
+  button:focus-visible {
+    outline: 3px solid #0891B2;
+    outline-offset: 3px;
+  }
+  input:focus-visible, select:focus-visible, textarea:focus-visible {
+    outline: 3px solid #0891B2;
+    outline-offset: 2px;
+  }
+
+  /* Skip link */
+  .skip-link {
+    position: absolute;
+    top: -100px;
+    left: 1rem;
+    background: #0891B2;
+    color: #fff;
+    padding: 0.75rem 1.25rem;
+    border-radius: 0.5rem;
+    font-weight: 600;
+    z-index: 100;
+    transition: top 150ms ease;
+  }
+  .skip-link:focus { top: 1rem; }
+
+  /* Hero gradient — subtle, not glassy */
+  .hero-bg {
+    background:
+      radial-gradient(ellipse 800px 600px at 20% 0%, rgba(8,145,178,0.10), transparent 60%),
+      radial-gradient(ellipse 700px 500px at 100% 100%, rgba(34,197,94,0.07), transparent 60%),
+      linear-gradient(180deg, #F0FDFA 0%, #FFFFFF 100%);
+  }
+
+  /* Doctor avatar — gradient circle as photo placeholder */
+  .avatar {
+    background:
+      radial-gradient(circle at 30% 30%, #5EEAD4, #0891B2 70%);
+    color: #FFFFFF;
+    font-weight: 600;
+  }
+  .avatar-warm {
+    background: radial-gradient(circle at 30% 30%, #FCD34D, #D97706 70%);
+  }
+  .avatar-cool {
+    background: radial-gradient(circle at 30% 30%, #93C5FD, #155E75 70%);
+  }
+  .avatar-sage {
+    background: radial-gradient(circle at 30% 30%, #86EFAC, #15803D 70%);
+  }
+
+  /* Map placeholder — simple stylized grid */
+  .map-placeholder {
+    background-color: #F0FDFA;
+    background-image:
+      linear-gradient(#CCFBF1 1px, transparent 1px),
+      linear-gradient(90deg, #CCFBF1 1px, transparent 1px);
+    background-size: 24px 24px;
+    background-position: center;
+  }
+
+  /* Reduced motion */
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+
+  /* Body text minimum size */
+  p, li, label, input, select, textarea, button { font-size: 1rem; }
+  small { font-size: 0.875rem; }
+
+  /* Tap targets */
+  a.tap, button.tap, .tap { min-height: 44px; min-width: 44px; }
+
+  /* Custom checkbox/radio (accessible) — Tailwind forms plugin handles base */
+</style>
+</head>
+
+<body class="bg-white text-ink antialiased">
+
+<a href="#main" class="skip-link">跳至主要內容 / Skip to main content</a>
+
+<!-- ─────────────────────── Header ─────────────────────── -->
+<header class="sticky top-0 z-40 bg-white/95 backdrop-blur border-b border-ink-line" role="banner">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="flex items-center justify-between h-16 md:h-20">
+
+      <!-- Brand -->
+      <a href="#top" class="flex items-center gap-3 tap" aria-label="晨光診所 首頁">
+        <span class="inline-flex items-center justify-center w-10 h-10 rounded-xl bg-brand-600 text-white shadow-card" aria-hidden="true">
+          <!-- Sunrise / cross-in-circle icon -->
+          <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 3v3"/><path d="M5.6 9.4l2.1 2.1"/><path d="M3 17h18"/>
+            <path d="M18.4 9.4l-2.1 2.1"/><path d="M6 17a6 6 0 0 1 12 0"/>
+          </svg>
+        </span>
+        <span class="flex flex-col leading-tight">
+          <span class="font-semibold text-ink text-lg">晨光診所</span>
+          <span class="text-xs text-ink-faint hidden sm:block">Sunrise Clinic</span>
+        </span>
+      </a>
+
+      <!-- Nav -->
+      <nav class="hidden lg:flex items-center gap-1" aria-label="主要導覽">
+        <a href="#services" class="px-3 py-2 rounded-lg text-ink-soft hover:text-brand-700 hover:bg-brand-50 transition-colors tap">服務 Services</a>
+        <a href="#doctors" class="px-3 py-2 rounded-lg text-ink-soft hover:text-brand-700 hover:bg-brand-50 transition-colors tap">醫師 Doctors</a>
+        <a href="#portal" class="px-3 py-2 rounded-lg text-ink-soft hover:text-brand-700 hover:bg-brand-50 transition-colors tap">病人專區 Portal</a>
+        <a href="#faq" class="px-3 py-2 rounded-lg text-ink-soft hover:text-brand-700 hover:bg-brand-50 transition-colors tap">常見問題 FAQ</a>
+        <a href="#contact" class="px-3 py-2 rounded-lg text-ink-soft hover:text-brand-700 hover:bg-brand-50 transition-colors tap">聯絡 Contact</a>
+      </nav>
+
+      <!-- Right actions -->
+      <div class="flex items-center gap-2">
+        <a href="tel:+886222345678"
+           class="hidden sm:inline-flex items-center gap-2 px-3 py-2 rounded-lg text-brand-700 hover:bg-brand-50 transition-colors tap font-medium"
+           aria-label="撥打診所電話 02-2234-5678">
+          <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.37 1.9.72 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.35 1.85.59 2.81.72A2 2 0 0 1 22 16.92Z"/>
+          </svg>
+          <span class="font-mono text-sm">02-2234-5678</span>
+        </a>
+        <a href="#book"
+           class="btn inline-flex items-center gap-2 px-4 py-2.5 rounded-lg bg-care-600 hover:bg-care-700 text-white font-semibold transition-colors tap shadow-card">
+          <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/>
+          </svg>
+          <span>立即預約 / Book</span>
+        </a>
+      </div>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+
+<!-- ─────────────────────── Hero ─────────────────────── -->
+<section id="top" class="hero-bg" aria-labelledby="hero-title">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-12 pb-16 md:pt-20 md:pb-24">
+    <div class="grid lg:grid-cols-12 gap-10 lg:gap-16 items-center">
+
+      <div class="lg:col-span-7">
+        <p class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white text-brand-700 text-sm font-medium border border-brand-100 shadow-sm">
+          <span class="w-2 h-2 rounded-full bg-care-500" aria-hidden="true"></span>
+          <span>今日門診開放中 · Open today 08:00–21:00</span>
+        </p>
+
+        <h1 id="hero-title" class="mt-6 font-display text-4xl sm:text-5xl md:text-6xl font-semibold text-ink leading-[1.15]">
+          以信任為核心，<br />
+          為每一位家人提供<span class="text-brand-700">完整照護</span>。
+        </h1>
+        <p class="mt-3 text-lg md:text-xl text-ink-muted leading-relaxed max-w-2xl">
+          Trustworthy, accessible primary care — for every member of your family.
+        </p>
+        <p class="mt-6 text-base md:text-lg text-ink-soft max-w-2xl">
+          晨光診所提供家庭醫學、內科、小兒科、皮膚科、心臟內科及健康檢查等門診服務，
+          並提供線上預約、檢驗報告查詢與處方追蹤，讓您在家就能掌握自己的健康。
+        </p>
+
+        <div class="mt-8 flex flex-col sm:flex-row gap-3">
+          <a href="#book"
+             class="btn inline-flex items-center justify-center gap-2 px-6 py-4 rounded-xl bg-care-600 hover:bg-care-700 text-white font-semibold text-lg transition-colors tap shadow-card">
+            <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/>
+            </svg>
+            立即預約看診
+            <span class="text-sm font-normal opacity-90">Book now</span>
+          </a>
+          <a href="#services"
+             class="btn inline-flex items-center justify-center gap-2 px-6 py-4 rounded-xl border-2 border-brand-600 text-brand-700 hover:bg-brand-50 font-semibold text-lg transition-colors tap">
+            查看服務項目
+            <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M5 12h14M13 5l7 7-7 7"/>
+            </svg>
+          </a>
+        </div>
+
+        <!-- Quick stats -->
+        <dl class="mt-10 grid grid-cols-3 gap-6 max-w-xl border-t border-ink-line pt-6">
+          <div>
+            <dt class="text-sm text-ink-faint">執業年資 Years</dt>
+            <dd class="mt-1 text-2xl md:text-3xl font-semibold text-ink">18+</dd>
+          </div>
+          <div>
+            <dt class="text-sm text-ink-faint">在地家庭 Families</dt>
+            <dd class="mt-1 text-2xl md:text-3xl font-semibold text-ink">12,000+</dd>
+          </div>
+          <div>
+            <dt class="text-sm text-ink-faint">滿意度 CSAT</dt>
+            <dd class="mt-1 text-2xl md:text-3xl font-semibold text-ink">4.9<span class="text-base text-ink-faint font-normal"> / 5</span></dd>
+          </div>
+        </dl>
+      </div>
+
+      <!-- Hero visual: doctor card mock + reassurance points -->
+      <aside class="lg:col-span-5" aria-label="今日門診摘要">
+        <div class="bg-white rounded-2xl p-6 md:p-8 shadow-card border border-ink-line">
+          <div class="flex items-start gap-4">
+            <div class="avatar w-14 h-14 rounded-full flex items-center justify-center text-lg shrink-0" aria-hidden="true">林</div>
+            <div class="min-w-0">
+              <p class="text-sm text-ink-faint">主治醫師 · Attending</p>
+              <h2 class="text-lg font-semibold text-ink">林文彥 醫師</h2>
+              <p class="text-sm text-ink-muted">家庭醫學科 · Family Medicine</p>
+            </div>
+            <span class="ml-auto inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-care-50 text-care-700 text-xs font-semibold border border-care-100">
+              <span class="w-1.5 h-1.5 rounded-full bg-care-500" aria-hidden="true"></span>
+              今日看診
+            </span>
+          </div>
+
+          <ul class="mt-6 space-y-3" role="list">
+            <li class="flex items-center justify-between p-3 rounded-lg bg-brand-50 border border-brand-100">
+              <div class="flex items-center gap-3">
+                <span class="inline-flex w-8 h-8 rounded-md bg-white text-brand-700 items-center justify-center" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>
+                </span>
+                <div>
+                  <p class="text-sm font-semibold text-ink">下一個可預約時段</p>
+                  <p class="text-xs text-ink-muted">Next available</p>
+                </div>
+              </div>
+              <span class="text-right">
+                <span class="block text-base font-semibold text-brand-700">今日 14:30</span>
+                <span class="block text-xs text-ink-faint">2026-05-14 Wed</span>
+              </span>
+            </li>
+            <li class="flex items-center justify-between p-3 rounded-lg border border-ink-line">
+              <div class="flex items-center gap-3">
+                <span class="inline-flex w-8 h-8 rounded-md bg-warm-50 text-warm-600 items-center justify-center" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12h18M3 6h18M3 18h18"/></svg>
+                </span>
+                <div>
+                  <p class="text-sm font-semibold text-ink">候診人數</p>
+                  <p class="text-xs text-ink-muted">Waiting now</p>
+                </div>
+              </div>
+              <span class="text-base font-semibold text-ink">3 位</span>
+            </li>
+            <li class="flex items-center justify-between p-3 rounded-lg border border-ink-line">
+              <div class="flex items-center gap-3">
+                <span class="inline-flex w-8 h-8 rounded-md bg-care-50 text-care-700 items-center justify-center" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
+                </span>
+                <div>
+                  <p class="text-sm font-semibold text-ink">支援健保</p>
+                  <p class="text-xs text-ink-muted">NHI accepted</p>
+                </div>
+              </div>
+              <span class="text-sm text-care-700 font-medium">是 / Yes</span>
+            </li>
+          </ul>
+
+          <a href="#book" class="mt-6 btn w-full inline-flex items-center justify-center gap-2 px-5 py-3 rounded-lg bg-brand-600 hover:bg-brand-700 text-white font-semibold transition-colors tap">
+            選擇時段預約
+            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+          </a>
+        </div>
+      </aside>
+    </div>
+  </div>
+</section>
+
+<!-- ─────────────────────── Trust strip ─────────────────────── -->
+<section aria-labelledby="trust-title" class="bg-white border-y border-ink-line">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
+    <h2 id="trust-title" class="sr-only">機構認證與合作夥伴 Credentials & Affiliations</h2>
+    <p class="text-center text-sm text-ink-faint uppercase tracking-wide font-medium">值得信賴 · Trusted by patients, accredited by institutions</p>
+    <ul class="mt-6 grid grid-cols-2 md:grid-cols-4 gap-x-6 gap-y-6 items-stretch" role="list">
+      <li class="flex items-center gap-3 p-4 rounded-lg bg-brand-50/40 border border-brand-100">
+        <span class="inline-flex w-10 h-10 rounded-full bg-white text-brand-700 items-center justify-center shrink-0" aria-hidden="true">
+          <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2 4 6v6c0 5 3.5 9 8 10 4.5-1 8-5 8-10V6l-8-4Z"/><path d="m9 12 2 2 4-4"/></svg>
+        </span>
+        <div>
+          <p class="font-semibold text-ink text-sm">JCI 認證</p>
+          <p class="text-xs text-ink-muted">Joint Commission International</p>
+        </div>
+      </li>
+      <li class="flex items-center gap-3 p-4 rounded-lg bg-brand-50/40 border border-brand-100">
+        <span class="inline-flex w-10 h-10 rounded-full bg-white text-brand-700 items-center justify-center shrink-0" aria-hidden="true">
+          <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9 12 4l9 5"/><path d="M5 9v8a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V9"/></svg>
+        </span>
+        <div>
+          <p class="font-semibold text-ink text-sm">健保特約</p>
+          <p class="text-xs text-ink-muted">NHI Contracted Provider</p>
+        </div>
+      </li>
+      <li class="flex items-center gap-3 p-4 rounded-lg bg-brand-50/40 border border-brand-100">
+        <span class="inline-flex w-10 h-10 rounded-full bg-white text-brand-700 items-center justify-center shrink-0" aria-hidden="true">
+          <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v6M12 22v-2"/><circle cx="12" cy="14" r="6"/><path d="M9 14h6"/></svg>
+        </span>
+        <div>
+          <p class="font-semibold text-ink text-sm">家庭醫學會 會員</p>
+          <p class="text-xs text-ink-muted">TAFM Member Clinic</p>
+        </div>
+      </li>
+      <li class="flex items-center gap-3 p-4 rounded-lg bg-brand-50/40 border border-brand-100">
+        <span class="inline-flex w-10 h-10 rounded-full bg-white text-brand-700 items-center justify-center shrink-0" aria-hidden="true">
+          <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg>
+        </span>
+        <div>
+          <p class="font-semibold text-ink text-sm">資安認證</p>
+          <p class="text-xs text-ink-muted">ISO/IEC 27001 個資保護</p>
+        </div>
+      </li>
+    </ul>
+  </div>
+</section>
+
+<!-- ─────────────────────── Services directory ─────────────────────── -->
+<section id="services" aria-labelledby="services-title" class="bg-brand-50/40">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 md:py-24">
+    <header class="max-w-3xl">
+      <p class="text-sm font-semibold text-brand-700 tracking-wide uppercase">01 · Services</p>
+      <h2 id="services-title" class="mt-2 font-display text-3xl md:text-4xl font-semibold text-ink">完整門診服務</h2>
+      <p class="mt-2 text-lg text-ink-muted">Comprehensive primary care under one roof.</p>
+      <p class="mt-4 text-ink-soft">六大專科門診，由具備臺灣專科醫師證照的醫師為您看診。所有看診過程及檢驗結果都會即時同步至您的病人專區，讓您與家人都能隨時掌握。</p>
+    </header>
+
+    <ul class="mt-12 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6" role="list">
+      <!-- Service 1 -->
+      <li>
+        <a href="#book" class="group block h-full p-6 rounded-2xl bg-white border border-ink-line hover:border-brand-300 hover:shadow-cardHover transition-all tap focus-visible:shadow-cardHover">
+          <span class="inline-flex w-12 h-12 rounded-xl bg-brand-50 text-brand-700 items-center justify-center" aria-hidden="true">
+            <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12h4l2-7 4 14 2-7h6"/></svg>
+          </span>
+          <h3 class="mt-5 text-xl font-semibold text-ink">家庭醫學科</h3>
+          <p class="text-sm text-ink-faint">Family Medicine</p>
+          <p class="mt-3 text-ink-soft">從感冒、慢性病管理到健康諮詢——一位醫師、一個家庭，提供長期信任的關係式照護。</p>
+          <p class="mt-5 inline-flex items-center gap-1.5 text-brand-700 font-medium text-sm">
+            預約家醫科 <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+          </p>
+        </a>
+      </li>
+      <!-- Service 2 -->
+      <li>
+        <a href="#book" class="group block h-full p-6 rounded-2xl bg-white border border-ink-line hover:border-brand-300 hover:shadow-cardHover transition-all tap">
+          <span class="inline-flex w-12 h-12 rounded-xl bg-brand-50 text-brand-700 items-center justify-center" aria-hidden="true">
+            <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2v6a6 6 0 0 0 12 0V2"/><path d="M9 22a3 3 0 1 1 0-6 3 3 0 0 1 0 6Z"/><path d="M9 16v-4"/></svg>
+          </span>
+          <h3 class="mt-5 text-xl font-semibold text-ink">內科</h3>
+          <p class="text-sm text-ink-faint">Internal Medicine</p>
+          <p class="mt-3 text-ink-soft">糖尿病、高血壓、高血脂、腸胃道疾病等內科問題的診斷與長期追蹤。</p>
+          <p class="mt-5 inline-flex items-center gap-1.5 text-brand-700 font-medium text-sm">
+            預約內科 <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+          </p>
+        </a>
+      </li>
+      <!-- Service 3 -->
+      <li>
+        <a href="#book" class="group block h-full p-6 rounded-2xl bg-white border border-ink-line hover:border-brand-300 hover:shadow-cardHover transition-all tap">
+          <span class="inline-flex w-12 h-12 rounded-xl bg-brand-50 text-brand-700 items-center justify-center" aria-hidden="true">
+            <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="3"/><path d="M5 22a7 7 0 0 1 14 0"/><path d="M9 14a4 4 0 0 0 6 0"/></svg>
+          </span>
+          <h3 class="mt-5 text-xl font-semibold text-ink">小兒科</h3>
+          <p class="text-sm text-ink-faint">Pediatrics</p>
+          <p class="mt-3 text-ink-soft">從新生兒、幼兒到青少年的常見疾病、預防接種與生長發育評估，溫柔陪伴成長每一步。</p>
+          <p class="mt-5 inline-flex items-center gap-1.5 text-brand-700 font-medium text-sm">
+            預約小兒科 <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+          </p>
+        </a>
+      </li>
+      <!-- Service 4 -->
+      <li>
+        <a href="#book" class="group block h-full p-6 rounded-2xl bg-white border border-ink-line hover:border-brand-300 hover:shadow-cardHover transition-all tap">
+          <span class="inline-flex w-12 h-12 rounded-xl bg-brand-50 text-brand-700 items-center justify-center" aria-hidden="true">
+            <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7-4.35-7-10a5 5 0 0 1 9-3 5 5 0 0 1 9 3c0 5.65-7 10-7 10z" opacity=".4"/><circle cx="12" cy="11" r="2.5"/></svg>
+          </span>
+          <h3 class="mt-5 text-xl font-semibold text-ink">皮膚科</h3>
+          <p class="text-sm text-ink-faint">Dermatology</p>
+          <p class="mt-3 text-ink-soft">濕疹、青春痘、過敏皮膚炎、痣與斑點檢查；醫師會說明每一個診斷選項，讓您安心做決定。</p>
+          <p class="mt-5 inline-flex items-center gap-1.5 text-brand-700 font-medium text-sm">
+            預約皮膚科 <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+          </p>
+        </a>
+      </li>
+      <!-- Service 5 -->
+      <li>
+        <a href="#book" class="group block h-full p-6 rounded-2xl bg-white border border-ink-line hover:border-brand-300 hover:shadow-cardHover transition-all tap">
+          <span class="inline-flex w-12 h-12 rounded-xl bg-brand-50 text-brand-700 items-center justify-center" aria-hidden="true">
+            <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78L12 21.23l8.84-8.84a5.5 5.5 0 0 0 0-7.78Z"/><path d="M6.5 12h2l1.5-3 2.5 6 1.5-3h3.5"/></svg>
+          </span>
+          <h3 class="mt-5 text-xl font-semibold text-ink">心臟內科</h3>
+          <p class="text-sm text-ink-faint">Cardiology</p>
+          <p class="mt-3 text-ink-soft">心律不整、胸悶、心血管疾病風險評估，提供心電圖與超音波檢查，並協助轉診大型醫院。</p>
+          <p class="mt-5 inline-flex items-center gap-1.5 text-brand-700 font-medium text-sm">
+            預約心臟科 <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+          </p>
+        </a>
+      </li>
+      <!-- Service 6 -->
+      <li>
+        <a href="#book" class="group block h-full p-6 rounded-2xl bg-white border border-ink-line hover:border-brand-300 hover:shadow-cardHover transition-all tap">
+          <span class="inline-flex w-12 h-12 rounded-xl bg-brand-50 text-brand-700 items-center justify-center" aria-hidden="true">
+            <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 10h18"/><path d="M8 14h3M8 17h2M14 14h3M14 17h3"/></svg>
+          </span>
+          <h3 class="mt-5 text-xl font-semibold text-ink">健康檢查</h3>
+          <p class="text-sm text-ink-faint">Health Check-up</p>
+          <p class="mt-3 text-ink-soft">勞工體檢、自費全身健檢、成人預防保健、學生體檢；報告 7 天內出爐，醫師親自為您解讀。</p>
+          <p class="mt-5 inline-flex items-center gap-1.5 text-brand-700 font-medium text-sm">
+            預約健檢 <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+          </p>
+        </a>
+      </li>
+    </ul>
+  </div>
+</section>
+
+<!-- ─────────────────────── Doctors ─────────────────────── -->
+<section id="doctors" aria-labelledby="doctors-title" class="bg-white">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 md:py-24">
+    <header class="max-w-3xl">
+      <p class="text-sm font-semibold text-brand-700 tracking-wide uppercase">02 · Our Doctors</p>
+      <h2 id="doctors-title" class="mt-2 font-display text-3xl md:text-4xl font-semibold text-ink">您可以信賴的醫師</h2>
+      <p class="mt-2 text-lg text-ink-muted">Specialists who listen first, then explain everything.</p>
+    </header>
+
+    <ul class="mt-12 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6" role="list">
+      <!-- Doctor 1 -->
+      <li class="rounded-2xl p-6 border border-ink-line bg-white hover:shadow-cardHover transition-shadow">
+        <div class="flex items-center gap-4">
+          <div class="avatar w-16 h-16 rounded-full flex items-center justify-center text-xl" aria-hidden="true">林</div>
+          <div class="min-w-0">
+            <h3 class="font-semibold text-ink text-lg leading-tight">林文彥 醫師</h3>
+            <p class="text-sm text-ink-muted">Dr. Wen-Yen Lin</p>
+          </div>
+        </div>
+        <p class="mt-4 inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md bg-brand-50 text-brand-700 text-xs font-semibold">家庭醫學科 · Family Medicine</p>
+        <dl class="mt-4 space-y-2 text-sm">
+          <div class="flex gap-2"><dt class="w-16 text-ink-faint shrink-0">學歷</dt><dd class="text-ink-soft">臺大醫學系</dd></div>
+          <div class="flex gap-2"><dt class="w-16 text-ink-faint shrink-0">專科</dt><dd class="text-ink-soft">家醫科專科醫師、安寧緩和醫學</dd></div>
+          <div class="flex gap-2"><dt class="w-16 text-ink-faint shrink-0">語言</dt><dd class="text-ink-soft">中文 · English · 台語</dd></div>
+        </dl>
+        <a href="#book" class="mt-5 inline-flex items-center gap-1.5 text-brand-700 hover:text-brand-800 font-semibold text-sm tap">預約林醫師
+          <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+        </a>
+      </li>
+      <!-- Doctor 2 -->
+      <li class="rounded-2xl p-6 border border-ink-line bg-white hover:shadow-cardHover transition-shadow">
+        <div class="flex items-center gap-4">
+          <div class="avatar avatar-cool w-16 h-16 rounded-full flex items-center justify-center text-xl" aria-hidden="true">陳</div>
+          <div class="min-w-0">
+            <h3 class="font-semibold text-ink text-lg leading-tight">陳曉雯 醫師</h3>
+            <p class="text-sm text-ink-muted">Dr. Hsiao-Wen Chen</p>
+          </div>
+        </div>
+        <p class="mt-4 inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md bg-brand-50 text-brand-700 text-xs font-semibold">小兒科 · Pediatrics</p>
+        <dl class="mt-4 space-y-2 text-sm">
+          <div class="flex gap-2"><dt class="w-16 text-ink-faint shrink-0">學歷</dt><dd class="text-ink-soft">陽明醫學系</dd></div>
+          <div class="flex gap-2"><dt class="w-16 text-ink-faint shrink-0">專科</dt><dd class="text-ink-soft">兒童感染、新生兒照護</dd></div>
+          <div class="flex gap-2"><dt class="w-16 text-ink-faint shrink-0">語言</dt><dd class="text-ink-soft">中文 · English</dd></div>
+        </dl>
+        <a href="#book" class="mt-5 inline-flex items-center gap-1.5 text-brand-700 hover:text-brand-800 font-semibold text-sm tap">預約陳醫師
+          <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+        </a>
+      </li>
+      <!-- Doctor 3 -->
+      <li class="rounded-2xl p-6 border border-ink-line bg-white hover:shadow-cardHover transition-shadow">
+        <div class="flex items-center gap-4">
+          <div class="avatar avatar-sage w-16 h-16 rounded-full flex items-center justify-center text-xl" aria-hidden="true">黃</div>
+          <div class="min-w-0">
+            <h3 class="font-semibold text-ink text-lg leading-tight">黃志豪 醫師</h3>
+            <p class="text-sm text-ink-muted">Dr. Chih-Hao Huang</p>
+          </div>
+        </div>
+        <p class="mt-4 inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md bg-brand-50 text-brand-700 text-xs font-semibold">心臟內科 · Cardiology</p>
+        <dl class="mt-4 space-y-2 text-sm">
+          <div class="flex gap-2"><dt class="w-16 text-ink-faint shrink-0">學歷</dt><dd class="text-ink-soft">成大醫學系、UCLA Fellow</dd></div>
+          <div class="flex gap-2"><dt class="w-16 text-ink-faint shrink-0">專科</dt><dd class="text-ink-soft">心律不整、心血管疾病預防</dd></div>
+          <div class="flex gap-2"><dt class="w-16 text-ink-faint shrink-0">語言</dt><dd class="text-ink-soft">中文 · English · 台語</dd></div>
+        </dl>
+        <a href="#book" class="mt-5 inline-flex items-center gap-1.5 text-brand-700 hover:text-brand-800 font-semibold text-sm tap">預約黃醫師
+          <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+        </a>
+      </li>
+      <!-- Doctor 4 -->
+      <li class="rounded-2xl p-6 border border-ink-line bg-white hover:shadow-cardHover transition-shadow">
+        <div class="flex items-center gap-4">
+          <div class="avatar avatar-warm w-16 h-16 rounded-full flex items-center justify-center text-xl" aria-hidden="true">王</div>
+          <div class="min-w-0">
+            <h3 class="font-semibold text-ink text-lg leading-tight">王怡君 醫師</h3>
+            <p class="text-sm text-ink-muted">Dr. Yi-Chun Wang</p>
+          </div>
+        </div>
+        <p class="mt-4 inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md bg-brand-50 text-brand-700 text-xs font-semibold">皮膚科 · Dermatology</p>
+        <dl class="mt-4 space-y-2 text-sm">
+          <div class="flex gap-2"><dt class="w-16 text-ink-faint shrink-0">學歷</dt><dd class="text-ink-soft">高醫醫學系</dd></div>
+          <div class="flex gap-2"><dt class="w-16 text-ink-faint shrink-0">專科</dt><dd class="text-ink-soft">皮膚過敏、青春痘治療、皮膚鏡</dd></div>
+          <div class="flex gap-2"><dt class="w-16 text-ink-faint shrink-0">語言</dt><dd class="text-ink-soft">中文 · English · 日本語</dd></div>
+        </dl>
+        <a href="#book" class="mt-5 inline-flex items-center gap-1.5 text-brand-700 hover:text-brand-800 font-semibold text-sm tap">預約王醫師
+          <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+        </a>
+      </li>
+    </ul>
+  </div>
+</section>
+
+<!-- ─────────────────────── Patient Portal preview ─────────────────────── -->
+<section id="portal" aria-labelledby="portal-title" class="bg-brand-900 text-white">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 md:py-24">
+    <div class="grid lg:grid-cols-12 gap-12 lg:gap-16 items-start">
+
+      <div class="lg:col-span-5 lg:sticky lg:top-24">
+        <p class="text-sm font-semibold text-brand-200 tracking-wide uppercase">03 · Patient Portal</p>
+        <h2 id="portal-title" class="mt-2 font-display text-3xl md:text-4xl font-semibold text-white leading-tight">您的健康<br />一目了然。</h2>
+        <p class="mt-3 text-lg text-brand-100">Your records, appointments, and prescriptions — all in one secure place.</p>
+        <p class="mt-6 text-brand-50 leading-relaxed">
+          登入晨光診所的病人專區，即可查看門診紀錄、檢驗報告、處方箋與用藥提醒。所有資料通過 ISO 27001 標準加密保護，醫師同步使用同一份病歷，讓照護不中斷。
+        </p>
+        <ul class="mt-6 space-y-3" role="list">
+          <li class="flex items-start gap-3">
+            <span class="inline-flex w-6 h-6 rounded-full bg-care-500 text-white items-center justify-center shrink-0 mt-0.5" aria-hidden="true">
+              <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
+            </span>
+            <p class="text-brand-50">查看 / 更改 / 取消預約時段</p>
+          </li>
+          <li class="flex items-start gap-3">
+            <span class="inline-flex w-6 h-6 rounded-full bg-care-500 text-white items-center justify-center shrink-0 mt-0.5" aria-hidden="true">
+              <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
+            </span>
+            <p class="text-brand-50">下載 PDF 檢驗報告、與其他醫療院所共享</p>
+          </li>
+          <li class="flex items-start gap-3">
+            <span class="inline-flex w-6 h-6 rounded-full bg-care-500 text-white items-center justify-center shrink-0 mt-0.5" aria-hidden="true">
+              <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
+            </span>
+            <p class="text-brand-50">用藥提醒推播、慢性處方箋線上續領</p>
+          </li>
+          <li class="flex items-start gap-3">
+            <span class="inline-flex w-6 h-6 rounded-full bg-care-500 text-white items-center justify-center shrink-0 mt-0.5" aria-hidden="true">
+              <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
+            </span>
+            <p class="text-brand-50">家人帳號授權、由您決定誰可以查看</p>
+          </li>
+        </ul>
+        <a href="#book" class="mt-8 btn inline-flex items-center gap-2 px-5 py-3 rounded-lg bg-white text-brand-800 hover:bg-brand-50 font-semibold transition-colors tap">
+          建立病人帳號
+          <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+        </a>
+      </div>
+
+      <!-- Mock portal UI -->
+      <div class="lg:col-span-7">
+        <div class="bg-white text-ink rounded-2xl shadow-card border border-brand-700 overflow-hidden">
+          <!-- Window bar (decorative) -->
+          <div class="flex items-center gap-2 px-4 py-3 bg-brand-50 border-b border-ink-line">
+            <span class="w-2.5 h-2.5 rounded-full bg-ink-line" aria-hidden="true"></span>
+            <span class="w-2.5 h-2.5 rounded-full bg-ink-line" aria-hidden="true"></span>
+            <span class="w-2.5 h-2.5 rounded-full bg-ink-line" aria-hidden="true"></span>
+            <p class="ml-2 text-xs text-ink-faint font-mono">portal.sunrise-clinic.tw</p>
+          </div>
+
+          <div class="p-5 md:p-6">
+            <!-- Greeting -->
+            <div class="flex items-center justify-between">
+              <div class="flex items-center gap-3">
+                <div class="avatar avatar-cool w-10 h-10 rounded-full flex items-center justify-center text-sm" aria-hidden="true">王</div>
+                <div>
+                  <p class="text-xs text-ink-faint">您好，</p>
+                  <p class="font-semibold text-ink leading-tight">王小華</p>
+                </div>
+              </div>
+              <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-care-50 text-care-700 text-xs font-semibold border border-care-100" aria-label="個資已加密保護">
+                <svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+                加密保護
+              </span>
+            </div>
+
+            <!-- Upcoming appointment -->
+            <article class="mt-5 p-4 rounded-xl bg-brand-50 border border-brand-100">
+              <p class="text-xs text-brand-700 font-semibold uppercase tracking-wide">即將到來 · Upcoming</p>
+              <div class="mt-2 flex items-center justify-between flex-wrap gap-3">
+                <div>
+                  <p class="font-semibold text-ink text-lg leading-tight">家庭醫學科 · 林文彥 醫師</p>
+                  <p class="text-sm text-ink-muted mt-0.5">2026-05-21（週四）下午 14:30 — 16:00 報到</p>
+                </div>
+                <div class="flex gap-2">
+                  <button type="button" class="btn px-3 py-2 rounded-lg bg-white border border-brand-200 text-brand-700 hover:bg-brand-100 text-sm font-medium transition-colors tap">改期</button>
+                  <button type="button" class="btn px-3 py-2 rounded-lg bg-white border border-ink-line text-ink-muted hover:bg-ink-line/30 text-sm font-medium transition-colors tap">取消</button>
+                </div>
+              </div>
+            </article>
+
+            <!-- Test results -->
+            <section class="mt-6" aria-labelledby="lab-title">
+              <div class="flex items-center justify-between">
+                <h3 id="lab-title" class="font-semibold text-ink">檢驗報告 · Test results</h3>
+                <a href="#" class="text-sm text-brand-700 hover:text-brand-800 font-medium">看全部</a>
+              </div>
+              <ul class="mt-3 divide-y divide-ink-line border border-ink-line rounded-xl overflow-hidden" role="list">
+                <li class="flex items-center justify-between p-3">
+                  <div>
+                    <p class="font-medium text-ink text-sm">血液常規 CBC</p>
+                    <p class="text-xs text-ink-faint mt-0.5">2026-05-08 · 林文彥 醫師</p>
+                  </div>
+                  <span class="inline-flex items-center gap-1.5 px-2 py-1 rounded-full bg-care-50 text-care-700 text-xs font-semibold border border-care-100">
+                    <span class="w-1.5 h-1.5 rounded-full bg-care-500" aria-hidden="true"></span>
+                    正常
+                  </span>
+                </li>
+                <li class="flex items-center justify-between p-3">
+                  <div>
+                    <p class="font-medium text-ink text-sm">血脂肪 Lipid panel</p>
+                    <p class="text-xs text-ink-faint mt-0.5">2026-05-08 · 黃志豪 醫師</p>
+                  </div>
+                  <span class="inline-flex items-center gap-1.5 px-2 py-1 rounded-full bg-warm-50 text-warm-600 text-xs font-semibold border border-warm-100">
+                    <span class="w-1.5 h-1.5 rounded-full bg-warm-500" aria-hidden="true"></span>
+                    需追蹤
+                  </span>
+                </li>
+                <li class="flex items-center justify-between p-3">
+                  <div>
+                    <p class="font-medium text-ink text-sm">糖化血色素 HbA1c</p>
+                    <p class="text-xs text-ink-faint mt-0.5">2026-04-12 · 林文彥 醫師</p>
+                  </div>
+                  <span class="inline-flex items-center gap-1.5 px-2 py-1 rounded-full bg-care-50 text-care-700 text-xs font-semibold border border-care-100">
+                    <span class="w-1.5 h-1.5 rounded-full bg-care-500" aria-hidden="true"></span>
+                    正常
+                  </span>
+                </li>
+              </ul>
+            </section>
+
+            <!-- Prescriptions -->
+            <section class="mt-6" aria-labelledby="rx-title">
+              <div class="flex items-center justify-between">
+                <h3 id="rx-title" class="font-semibold text-ink">目前處方 · Prescriptions</h3>
+                <a href="#" class="text-sm text-brand-700 hover:text-brand-800 font-medium">用藥紀錄</a>
+              </div>
+              <ul class="mt-3 grid sm:grid-cols-2 gap-3" role="list">
+                <li class="p-3 rounded-xl border border-ink-line">
+                  <div class="flex items-center justify-between">
+                    <p class="font-semibold text-ink text-sm">Metformin 500mg</p>
+                    <span class="text-xs text-ink-faint">每日 2 次</span>
+                  </div>
+                  <p class="mt-1 text-xs text-ink-muted">餘 14 天 · 可於 5 月 20 日續領</p>
+                  <button type="button" class="mt-3 inline-flex items-center gap-1.5 text-brand-700 hover:text-brand-800 text-sm font-medium tap">
+                    線上續領
+                    <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+                  </button>
+                </li>
+                <li class="p-3 rounded-xl border border-ink-line">
+                  <div class="flex items-center justify-between">
+                    <p class="font-semibold text-ink text-sm">Atorvastatin 10mg</p>
+                    <span class="text-xs text-ink-faint">睡前 1 次</span>
+                  </div>
+                  <p class="mt-1 text-xs text-ink-muted">餘 21 天 · 可於 5 月 28 日續領</p>
+                  <button type="button" class="mt-3 inline-flex items-center gap-1.5 text-brand-700 hover:text-brand-800 text-sm font-medium tap">
+                    線上續領
+                    <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+                  </button>
+                </li>
+              </ul>
+            </section>
+          </div>
+        </div>
+        <p class="mt-3 text-xs text-brand-200 text-center">這是介面預覽。實際操作需先註冊病人帳號並完成身分驗證。</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ─────────────────────── Appointment Booking ─────────────────────── -->
+<section id="book" aria-labelledby="book-title" class="bg-white">
+  <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-16 md:py-24">
+    <header class="text-center max-w-2xl mx-auto">
+      <p class="text-sm font-semibold text-brand-700 tracking-wide uppercase">04 · Book Appointment</p>
+      <h2 id="book-title" class="mt-2 font-display text-3xl md:text-4xl font-semibold text-ink">線上預約看診</h2>
+      <p class="mt-3 text-lg text-ink-muted">花 30 秒填寫，我們會以 SMS 確認您的時段。</p>
+    </header>
+
+    <form class="mt-10 p-6 md:p-10 rounded-2xl bg-brand-50/40 border border-ink-line shadow-card"
+          aria-describedby="form-help"
+          novalidate>
+      <p id="form-help" class="sr-only">所有標示星號 (必填) 的欄位皆為必填。</p>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+
+        <div>
+          <label for="f-name" class="block text-sm font-semibold text-ink mb-1.5">
+            姓名 <span class="text-care-700" aria-hidden="true">*</span>
+            <span class="sr-only">(必填)</span>
+            <span class="block text-xs text-ink-faint font-normal">Full name</span>
+          </label>
+          <input id="f-name" name="name" type="text" autocomplete="name" required
+                 class="field w-full px-4 py-3 rounded-lg border border-ink-line bg-white text-ink placeholder:text-ink-faint focus:border-brand-600 transition-colors min-h-[48px]"
+                 placeholder="例如：王小華" />
+        </div>
+
+        <div>
+          <label for="f-id" class="block text-sm font-semibold text-ink mb-1.5">
+            身分證末四碼
+            <span class="block text-xs text-ink-faint font-normal">Last 4 digits of National ID (optional)</span>
+          </label>
+          <input id="f-id" name="id_last4" type="text" inputmode="numeric" pattern="[A-Za-z0-9]{4}" maxlength="4"
+                 autocomplete="off"
+                 class="field w-full px-4 py-3 rounded-lg border border-ink-line bg-white text-ink placeholder:text-ink-faint focus:border-brand-600 transition-colors min-h-[48px] font-mono"
+                 placeholder="0000" />
+        </div>
+
+        <div>
+          <label for="f-phone" class="block text-sm font-semibold text-ink mb-1.5">
+            手機號碼 <span class="text-care-700" aria-hidden="true">*</span>
+            <span class="sr-only">(必填)</span>
+            <span class="block text-xs text-ink-faint font-normal">Mobile number — for SMS confirmation</span>
+          </label>
+          <input id="f-phone" name="phone" type="tel" autocomplete="tel-national" required
+                 class="field w-full px-4 py-3 rounded-lg border border-ink-line bg-white text-ink placeholder:text-ink-faint focus:border-brand-600 transition-colors min-h-[48px] font-mono"
+                 placeholder="0912-345-678" />
+        </div>
+
+        <div>
+          <label for="f-email" class="block text-sm font-semibold text-ink mb-1.5">
+            電子郵件
+            <span class="block text-xs text-ink-faint font-normal">Email (optional)</span>
+          </label>
+          <input id="f-email" name="email" type="email" autocomplete="email"
+                 class="field w-full px-4 py-3 rounded-lg border border-ink-line bg-white text-ink placeholder:text-ink-faint focus:border-brand-600 transition-colors min-h-[48px]"
+                 placeholder="you@example.com" />
+        </div>
+
+        <div>
+          <label for="f-dept" class="block text-sm font-semibold text-ink mb-1.5">
+            預約科別 <span class="text-care-700" aria-hidden="true">*</span>
+            <span class="sr-only">(必填)</span>
+            <span class="block text-xs text-ink-faint font-normal">Department</span>
+          </label>
+          <select id="f-dept" name="department" required
+                  class="field w-full px-4 py-3 rounded-lg border border-ink-line bg-white text-ink focus:border-brand-600 transition-colors min-h-[48px]">
+            <option value="">請選擇 / Please choose…</option>
+            <option value="family">家庭醫學科 Family Medicine</option>
+            <option value="internal">內科 Internal Medicine</option>
+            <option value="pediatrics">小兒科 Pediatrics</option>
+            <option value="dermatology">皮膚科 Dermatology</option>
+            <option value="cardiology">心臟內科 Cardiology</option>
+            <option value="checkup">健康檢查 Health Check-up</option>
+          </select>
+        </div>
+
+        <div>
+          <label for="f-doctor" class="block text-sm font-semibold text-ink mb-1.5">
+            指定醫師
+            <span class="block text-xs text-ink-faint font-normal">Preferred doctor (optional)</span>
+          </label>
+          <select id="f-doctor" name="doctor"
+                  class="field w-full px-4 py-3 rounded-lg border border-ink-line bg-white text-ink focus:border-brand-600 transition-colors min-h-[48px]">
+            <option value="">無偏好 / No preference</option>
+            <option value="lin">林文彥 醫師（家庭醫學）</option>
+            <option value="chen">陳曉雯 醫師（小兒科）</option>
+            <option value="huang">黃志豪 醫師（心臟內科）</option>
+            <option value="wang">王怡君 醫師（皮膚科）</option>
+          </select>
+        </div>
+
+        <div>
+          <label for="f-date" class="block text-sm font-semibold text-ink mb-1.5">
+            希望日期 <span class="text-care-700" aria-hidden="true">*</span>
+            <span class="sr-only">(必填)</span>
+            <span class="block text-xs text-ink-faint font-normal">Preferred date</span>
+          </label>
+          <input id="f-date" name="date" type="date" required min="2026-05-14"
+                 class="field w-full px-4 py-3 rounded-lg border border-ink-line bg-white text-ink focus:border-brand-600 transition-colors min-h-[48px]" />
+        </div>
+
+        <div>
+          <label for="f-time" class="block text-sm font-semibold text-ink mb-1.5">
+            希望時段 <span class="text-care-700" aria-hidden="true">*</span>
+            <span class="sr-only">(必填)</span>
+            <span class="block text-xs text-ink-faint font-normal">Preferred time slot</span>
+          </label>
+          <select id="f-time" name="time" required
+                  class="field w-full px-4 py-3 rounded-lg border border-ink-line bg-white text-ink focus:border-brand-600 transition-colors min-h-[48px]">
+            <option value="">請選擇 / Please choose…</option>
+            <option value="morning">上午 (08:00–12:00) Morning</option>
+            <option value="afternoon">下午 (14:00–18:00) Afternoon</option>
+            <option value="evening">晚間 (18:00–21:00) Evening</option>
+          </select>
+        </div>
+
+        <div class="md:col-span-2">
+          <label for="f-notes" class="block text-sm font-semibold text-ink mb-1.5">
+            症狀或備註
+            <span class="block text-xs text-ink-faint font-normal">Symptoms or notes (optional)</span>
+          </label>
+          <textarea id="f-notes" name="notes" rows="3"
+                    class="field w-full px-4 py-3 rounded-lg border border-ink-line bg-white text-ink placeholder:text-ink-faint focus:border-brand-600 transition-colors"
+                    placeholder="例：發燒兩天、咳嗽、慢性病追蹤……"></textarea>
+        </div>
+
+        <div class="md:col-span-2">
+          <div class="flex items-start gap-3">
+            <input id="f-consent" name="consent" type="checkbox" required
+                   class="mt-1.5 w-5 h-5 rounded border-ink-line text-brand-600 focus:ring-brand-600" />
+            <label for="f-consent" class="text-sm text-ink-soft leading-relaxed">
+              我已閱讀並同意
+              <a href="#" class="text-brand-700 underline underline-offset-2 hover:text-brand-800">個人資料保護告知</a>
+              ，並同意晨光診所以 SMS / Email 與我聯繫預約結果。 <span class="text-care-700" aria-hidden="true">*</span>
+              <span class="sr-only">(必填)</span>
+            </label>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="mt-8 flex flex-col sm:flex-row gap-3 sm:items-center sm:justify-between">
+        <p class="text-sm text-ink-muted">
+          <span aria-hidden="true">🔒</span>
+          您的資訊以 TLS 加密傳輸並儲存。
+        </p>
+        <button type="submit"
+                class="btn inline-flex items-center justify-center gap-2 px-6 py-4 rounded-xl bg-care-600 hover:bg-care-700 text-white font-semibold text-lg transition-colors tap shadow-card">
+          送出預約申請
+          <span class="text-sm font-normal opacity-90">Submit</span>
+          <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+        </button>
+      </div>
+    </form>
+
+    <p class="mt-4 text-sm text-ink-muted text-center">
+      偏好電話預約？請撥 <a href="tel:+886222345678" class="text-brand-700 hover:text-brand-800 font-semibold underline">02-2234-5678</a>，週一至週六 08:00–21:00 都有專人接聽。
+    </p>
+  </div>
+</section>
+
+<!-- ─────────────────────── FAQ + Insurance ─────────────────────── -->
+<section id="faq" aria-labelledby="faq-title" class="bg-brand-50/40 border-y border-ink-line">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 md:py-24">
+    <div class="grid lg:grid-cols-12 gap-12">
+      <header class="lg:col-span-4">
+        <p class="text-sm font-semibold text-brand-700 tracking-wide uppercase">05 · FAQ</p>
+        <h2 id="faq-title" class="mt-2 font-display text-3xl md:text-4xl font-semibold text-ink">常見問題</h2>
+        <p class="mt-3 text-lg text-ink-muted">Answers to the questions patients ask most.</p>
+
+        <div class="mt-8 p-5 rounded-2xl bg-white border border-brand-100">
+          <h3 class="font-semibold text-ink flex items-center gap-2">
+            <span class="inline-flex w-8 h-8 rounded-md bg-brand-50 text-brand-700 items-center justify-center" aria-hidden="true">
+              <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9 12 4l9 5"/><path d="M5 9v8a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V9"/></svg>
+            </span>
+            健保與自費說明
+          </h3>
+          <p class="mt-3 text-sm text-ink-soft leading-relaxed">
+            本院為健保特約診所，一般門診僅需 NT$150 部分負擔；65 歲以上長者及兒童另有優惠。
+            自費項目（如健檢、進階檢查）會在診間先行說明費用，您同意後才會進行。
+          </p>
+        </div>
+      </header>
+
+      <div class="lg:col-span-8">
+        <ul class="space-y-3" role="list">
+          <li>
+            <details class="group bg-white rounded-xl border border-ink-line open:shadow-card transition-shadow">
+              <summary class="flex items-center justify-between gap-4 cursor-pointer list-none p-5 tap focus-visible:rounded-xl">
+                <span class="font-semibold text-ink">第一次來看診需要準備什麼？</span>
+                <span class="shrink-0 w-8 h-8 rounded-full bg-brand-50 text-brand-700 inline-flex items-center justify-center transition-transform group-open:rotate-45" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M5 12h14"/></svg>
+                </span>
+              </summary>
+              <div class="px-5 pb-5 text-ink-soft leading-relaxed">
+                請攜帶健保卡與身分證件即可。若您有近期在他院的檢驗報告或用藥紀錄，建議一併帶來，方便醫師建立完整的健康檔案。
+              </div>
+            </details>
+          </li>
+          <li>
+            <details class="group bg-white rounded-xl border border-ink-line">
+              <summary class="flex items-center justify-between gap-4 cursor-pointer list-none p-5 tap focus-visible:rounded-xl">
+                <span class="font-semibold text-ink">小朋友看診需要家長陪同嗎？</span>
+                <span class="shrink-0 w-8 h-8 rounded-full bg-brand-50 text-brand-700 inline-flex items-center justify-center transition-transform group-open:rotate-45" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M5 12h14"/></svg>
+                </span>
+              </summary>
+              <div class="px-5 pb-5 text-ink-soft leading-relaxed">
+                未滿 18 歲的青少年與兒童需家長或法定代理人陪同。若家長無法到場，請事先電話告知並由其他成年親屬攜帶相關證件代為陪同。
+              </div>
+            </details>
+          </li>
+          <li>
+            <details class="group bg-white rounded-xl border border-ink-line">
+              <summary class="flex items-center justify-between gap-4 cursor-pointer list-none p-5 tap focus-visible:rounded-xl">
+                <span class="font-semibold text-ink">線上預約後如何確認？</span>
+                <span class="shrink-0 w-8 h-8 rounded-full bg-brand-50 text-brand-700 inline-flex items-center justify-center transition-transform group-open:rotate-45" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M5 12h14"/></svg>
+                </span>
+              </summary>
+              <div class="px-5 pb-5 text-ink-soft leading-relaxed">
+                送出預約申請後，您會在 10 分鐘內收到 SMS 確認簡訊，附上看診時間與報到序號。看診前一天，系統會再次發送提醒簡訊。
+              </div>
+            </details>
+          </li>
+          <li>
+            <details class="group bg-white rounded-xl border border-ink-line">
+              <summary class="flex items-center justify-between gap-4 cursor-pointer list-none p-5 tap focus-visible:rounded-xl">
+                <span class="font-semibold text-ink">是否提供無障礙就診環境？</span>
+                <span class="shrink-0 w-8 h-8 rounded-full bg-brand-50 text-brand-700 inline-flex items-center justify-center transition-transform group-open:rotate-45" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M5 12h14"/></svg>
+                </span>
+              </summary>
+              <div class="px-5 pb-5 text-ink-soft leading-relaxed">
+                本院位於一樓平面，設有電動門、無障礙廁所及輪椅。聽障朋友可使用書面溝通或預約時備註，我們會安排手語翻譯服務（需提前 3 個工作天預約）。
+              </div>
+            </details>
+          </li>
+          <li>
+            <details class="group bg-white rounded-xl border border-ink-line">
+              <summary class="flex items-center justify-between gap-4 cursor-pointer list-none p-5 tap focus-visible:rounded-xl">
+                <span class="font-semibold text-ink">能否取得電子病歷副本？</span>
+                <span class="shrink-0 w-8 h-8 rounded-full bg-brand-50 text-brand-700 inline-flex items-center justify-center transition-transform group-open:rotate-45" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M5 12h14"/></svg>
+                </span>
+              </summary>
+              <div class="px-5 pb-5 text-ink-soft leading-relaxed">
+                可以。您可於「病人專區」自行下載 PDF 病歷與檢驗報告；若需正式紙本（用於保險或轉診），請填寫病歷申請單，3 個工作天內備妥。
+              </div>
+            </details>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─────────────────────── Contact + Location ─────────────────────── -->
+<section id="contact" aria-labelledby="contact-title" class="bg-white">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 md:py-24">
+
+    <div class="grid lg:grid-cols-12 gap-12 items-start">
+      <header class="lg:col-span-5">
+        <p class="text-sm font-semibold text-brand-700 tracking-wide uppercase">06 · Visit Us</p>
+        <h2 id="contact-title" class="mt-2 font-display text-3xl md:text-4xl font-semibold text-ink">親自來訪</h2>
+        <p class="mt-3 text-lg text-ink-muted">Stop by — we're easy to find and easy to access.</p>
+
+        <dl class="mt-8 space-y-5">
+          <div class="flex gap-4">
+            <span class="inline-flex w-11 h-11 rounded-xl bg-brand-50 text-brand-700 items-center justify-center shrink-0" aria-hidden="true">
+              <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+            </span>
+            <div>
+              <dt class="font-semibold text-ink">地址</dt>
+              <dd class="text-ink-soft">10491 台北市中山區晨光路 23 巷 8 號 1 樓<br /><span class="text-sm text-ink-faint">1F, No. 8, Lane 23, Chenkuang Rd., Zhongshan Dist., Taipei 10491, Taiwan</span></dd>
+            </div>
+          </div>
+          <div class="flex gap-4">
+            <span class="inline-flex w-11 h-11 rounded-xl bg-brand-50 text-brand-700 items-center justify-center shrink-0" aria-hidden="true">
+              <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.37 1.9.72 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.35 1.85.59 2.81.72A2 2 0 0 1 22 16.92Z"/></svg>
+            </span>
+            <div>
+              <dt class="font-semibold text-ink">電話</dt>
+              <dd><a href="tel:+886222345678" class="text-brand-700 hover:text-brand-800 font-mono text-lg underline underline-offset-2">02-2234-5678</a></dd>
+            </div>
+          </div>
+          <div class="flex gap-4">
+            <span class="inline-flex w-11 h-11 rounded-xl bg-brand-50 text-brand-700 items-center justify-center shrink-0" aria-hidden="true">
+              <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg>
+            </span>
+            <div>
+              <dt class="font-semibold text-ink">Email</dt>
+              <dd><a href="mailto:hello@sunrise-clinic.tw" class="text-brand-700 hover:text-brand-800 underline underline-offset-2">hello@sunrise-clinic.tw</a></dd>
+            </div>
+          </div>
+          <div class="flex gap-4">
+            <span class="inline-flex w-11 h-11 rounded-xl bg-brand-50 text-brand-700 items-center justify-center shrink-0" aria-hidden="true">
+              <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>
+            </span>
+            <div>
+              <dt class="font-semibold text-ink">看診時間</dt>
+              <dd class="text-ink-soft">
+                <span class="block">週一 至 週五 · 08:00–12:00 / 14:00–21:00</span>
+                <span class="block">週六 · 08:00–12:00 / 14:00–17:00</span>
+                <span class="block text-ink-faint">週日及國定假日休診</span>
+              </dd>
+            </div>
+          </div>
+        </dl>
+
+        <div class="mt-8 flex flex-wrap gap-2">
+          <span class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-brand-50 text-brand-700 text-sm font-medium border border-brand-100">
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 20 3 14h6v-2H3l6-6"/><path d="M21 4v6h-6"/><path d="M21 10c-1 4-4.5 7-9 7"/></svg>
+            無障礙入口
+          </span>
+          <span class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-brand-50 text-brand-700 text-sm font-medium border border-brand-100">
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 9h18M3 15h18"/><circle cx="7" cy="6" r="1"/><circle cx="17" cy="18" r="1"/></svg>
+            捷運中山站步行 3 分鐘
+          </span>
+          <span class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-brand-50 text-brand-700 text-sm font-medium border border-brand-100">
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="6" width="18" height="12" rx="2"/><path d="M7 18v2M17 18v2"/></svg>
+            鄰近停車場
+          </span>
+        </div>
+      </header>
+
+      <div class="lg:col-span-7">
+        <figure class="rounded-2xl overflow-hidden border border-ink-line shadow-card">
+          <div class="map-placeholder aspect-[4/3] md:aspect-[16/10] flex items-center justify-center relative" role="img" aria-label="晨光診所位置地圖示意">
+            <!-- Stylized "pin" -->
+            <div class="absolute" style="top: 38%; left: 52%;">
+              <span class="block w-12 h-12 rounded-full bg-brand-600 text-white flex items-center justify-center shadow-cardHover">
+                <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+              </span>
+              <span class="block mt-1 px-2 py-0.5 rounded bg-white text-ink-soft text-xs font-medium border border-brand-100 shadow-sm whitespace-nowrap">晨光診所</span>
+            </div>
+          </div>
+          <figcaption class="px-5 py-3 bg-white border-t border-ink-line text-sm text-ink-muted flex items-center justify-between gap-4 flex-wrap">
+            <span>地圖示意——上線後將嵌入 Google Map / OpenStreetMap</span>
+            <a href="https://www.google.com/maps/search/?api=1&query=%E5%8F%B0%E5%8C%97%E5%B8%82%E4%B8%AD%E5%B1%B1%E5%8D%80"
+               target="_blank" rel="noopener"
+               class="inline-flex items-center gap-1.5 text-brand-700 hover:text-brand-800 font-semibold">
+              開啟導航
+              <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7"/><path d="M7 7h10v10"/></svg>
+            </a>
+          </figcaption>
+        </figure>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- ─────────────────────── Footer ─────────────────────── -->
+<footer class="bg-brand-900 text-brand-100" role="contentinfo">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-16">
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-8">
+      <div class="col-span-2">
+        <div class="flex items-center gap-3">
+          <span class="inline-flex items-center justify-center w-10 h-10 rounded-xl bg-white text-brand-700" aria-hidden="true">
+            <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v3"/><path d="M5.6 9.4l2.1 2.1"/><path d="M3 17h18"/><path d="M18.4 9.4l-2.1 2.1"/><path d="M6 17a6 6 0 0 1 12 0"/></svg>
+          </span>
+          <span class="flex flex-col leading-tight">
+            <span class="font-semibold text-white text-lg">晨光診所</span>
+            <span class="text-xs text-brand-300">Sunrise Clinic</span>
+          </span>
+        </div>
+        <p class="mt-4 text-sm leading-relaxed max-w-md">
+          以信任為核心，為每一位家人提供完整照護。
+          <br />Trustworthy, accessible primary care — for every member of your family.
+        </p>
+        <div class="mt-5 flex items-center gap-3">
+          <a href="tel:+886222345678" class="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-white/10 hover:bg-white/15 text-white border border-white/15 tap font-medium transition-colors" aria-label="撥打診所電話">
+            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.37 1.9.72 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.35 1.85.59 2.81.72A2 2 0 0 1 22 16.92Z"/></svg>
+            <span class="font-mono text-sm">02-2234-5678</span>
+          </a>
+          <a href="mailto:hello@sunrise-clinic.tw" class="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-white/10 hover:bg-white/15 text-white border border-white/15 tap font-medium transition-colors" aria-label="寄信給診所">
+            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg>
+            <span class="text-sm">Email</span>
+          </a>
+        </div>
+      </div>
+
+      <nav aria-label="頁腳 · 探索">
+        <h2 class="font-semibold text-white text-sm uppercase tracking-wide">探索 Explore</h2>
+        <ul class="mt-4 space-y-2.5">
+          <li><a href="#services" class="hover:text-white tap inline-block">服務 Services</a></li>
+          <li><a href="#doctors" class="hover:text-white tap inline-block">醫師 Doctors</a></li>
+          <li><a href="#portal" class="hover:text-white tap inline-block">病人專區 Portal</a></li>
+          <li><a href="#book" class="hover:text-white tap inline-block">線上預約 Book</a></li>
+        </ul>
+      </nav>
+      <nav aria-label="頁腳 · 院所">
+        <h2 class="font-semibold text-white text-sm uppercase tracking-wide">院所 Clinic</h2>
+        <ul class="mt-4 space-y-2.5">
+          <li><a href="#contact" class="hover:text-white tap inline-block">地址 / 看診時間</a></li>
+          <li><a href="#faq" class="hover:text-white tap inline-block">常見問題 FAQ</a></li>
+          <li><a href="#" class="hover:text-white tap inline-block">個資保護政策</a></li>
+          <li><a href="#" class="hover:text-white tap inline-block">無障礙聲明 Accessibility</a></li>
+        </ul>
+      </nav>
+    </div>
+
+    <div class="mt-12 pt-6 border-t border-white/10 flex flex-col md:flex-row md:items-center md:justify-between gap-3 text-sm">
+      <p>© 2026 晨光診所 · Sunrise Clinic. All rights reserved.</p>
+      <p class="text-brand-300">資料保護：本網站採用 TLS 1.3 加密；病歷儲存符合 ISO/IEC 27001。</p>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
